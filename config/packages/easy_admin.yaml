@@ -1,0 +1,8 @@
+easy_admin:
+  site_name: Casting <i>form</i>
+  design:
+    brand_color: '#1daa16'
+  entities:
+  # List the entity class name you want to manage
+    - App\Entity\CastingCategory
+    - App\Entity\CastingForm

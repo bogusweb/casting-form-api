@@ -51,6 +51,7 @@ class CastingCategoryController extends AbstractController
      * @Route("/api/CastingCategories/{id}")
      *
      * @param $id
+     * @param SerializerInterface $serializer
      * @return JsonResponse
      */
     public function show($id, SerializerInterface $serializer)

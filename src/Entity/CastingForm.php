@@ -107,7 +107,7 @@ class CastingForm
     private $approvalProcessing;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\CastingCategory", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\CastingCategory", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $castingCategory;

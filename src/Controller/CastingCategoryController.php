@@ -31,9 +31,9 @@ class CastingCategoryController extends AbstractController
             return new JsonResponse(['status' => 'error'], 200);
         }
 
-        $serializer = $this->get('jms_serializer');
-        $response = $serializer->serialize($castingCategories,'json');
+//        $serializer = $this->get('jms_serializer');
+//        $response = $serializer->serialize($castingCategories,'json');
 
-        return new JsonResponse(array('data' => $response));
+        return new JsonResponse(array('data' => $castingCategories));
     }
 }

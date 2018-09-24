@@ -11,29 +11,27 @@ namespace App\Controller;
 
 use App\Entity\CastingCategory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Serializer\SerializerInterface;
 
 class CastingCategoryController extends AbstractController
 {
 
     /**
      * @Route("/CastingCategories", name="casting_categories")
+     * @param SerializerInterface $serializer
+     * @return JsonResponse
      */
-    public function getCastingCategories()
+    public function getCastingCategories(SerializerInterface $serializer)
     {
         $castingCategories = $this->getDoctrine()
             ->getRepository(CastingCategory::class)
             ->findAll();
 
-        if (!$castingCategories) {
-            return new JsonResponse(['status' => 'error'], 200);
-        }
+        $data = $serializer->serialize($castingCategories, 'json',  ['json_encode_options' => JSON_UNESCAPED_SLASHES]);
 
-//        $serializer = $this->get('jms_serializer');
-//        $response = $serializer->serialize($castingCategories,'json');
-
-        return new JsonResponse(array('data' => $castingCategories));
+        return new JsonResponse(array('data' => $data));
     }
 }

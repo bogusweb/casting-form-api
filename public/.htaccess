@@ -1,4 +1,4 @@
-# Use the front controller as index file. It serves as a fallback solution when
+# Use the front_src controller as index file. It serves as a fallback solution when
 # every other rewrite/redirect fails (e.g. in an aliased environment without
 # mod_rewrite). Additionally, this reduces the matching process for the
 # start page (path "/") because otherwise Apache will apply the rewriting rules
@@ -12,7 +12,7 @@ DirectoryIndex index.php
 # Options FollowSymlinks
 
 # Disabling MultiViews prevents unwanted negotiation, e.g. "/index" should not resolve
-# to the front controller "/index.php" but be rewritten to "/index.php/index".
+# to the front_src controller "/index.php" but be rewritten to "/index.php/index".
 <IfModule mod_negotiation.c>
     Options -MultiViews
 </IfModule>
@@ -34,10 +34,10 @@ DirectoryIndex index.php
     RewriteCond %{HTTP:Authorization} .
     RewriteRule ^ - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
-    # Redirect to URI without front controller to prevent duplicate content
+    # Redirect to URI without front_src controller to prevent duplicate content
     # (with and without `/index.php`). Only do this redirect on the initial
     # rewrite by Apache and not on subsequent cycles. Otherwise we would get an
-    # endless redirect loop (request -> rewrite to front controller ->
+    # endless redirect loop (request -> rewrite to front_src controller ->
     # redirect -> request -> ...).
     # So in case you get a "too many redirects" error or you always get redirected
     # to the start page because your Apache does not expose the REDIRECT_STATUS
@@ -53,14 +53,14 @@ DirectoryIndex index.php
     RewriteCond %{REQUEST_FILENAME} -f
     RewriteRule ^ - [L]
 
-    # Rewrite all other queries to the front controller.
+    # Rewrite all other queries to the front_src controller.
     RewriteRule ^ %{ENV:BASE}/index.php [L]
 </IfModule>
 
 <IfModule !mod_rewrite.c>
     <IfModule mod_alias.c>
         # When mod_rewrite is not available, we instruct a temporary redirect of
-        # the start page to the front controller explicitly so that the website
+        # the start page to the front_src controller explicitly so that the website
         # and the generated links can still be used.
         RedirectMatch 307 ^/$ /index.php/
         # RedirectTemp cannot be used instead

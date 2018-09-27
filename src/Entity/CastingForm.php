@@ -7,10 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CastingFormRepository")
- * @ApiResource(
- *     collectionOperations={"post"},
- *     itemOperations={}
- * )
+ * @ApiResource()
  */
 class CastingForm
 {
@@ -116,6 +113,11 @@ class CastingForm
      * @ORM\JoinColumn(nullable=false)
      */
     private $castingCategory;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $images = [];
 
     public function getId(): ?int
     {
@@ -346,6 +348,18 @@ class CastingForm
     public function setCastingCategory(CastingCategory $castingCategory): self
     {
         $this->castingCategory = $castingCategory;
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function setImages(?array $images): self
+    {
+        $this->images = $images;
 
         return $this;
     }

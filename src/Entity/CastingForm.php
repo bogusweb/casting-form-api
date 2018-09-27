@@ -7,7 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CastingFormRepository")
- * @ApiResource()
+ * @ApiResource(
+ *     collectionOperations={"post"},
+ *     itemOperations={}
+ * )
  */
 class CastingForm
 {

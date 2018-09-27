@@ -10,3 +10,5 @@
 ###< symfony/web-server-bundle ###
 
 /.idea
+
+/front-src/node_modules

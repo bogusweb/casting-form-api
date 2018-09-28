@@ -11,7 +11,8 @@ import {MatFileUploadModule} from "angular-material-fileupload";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MatFileUploadModule
   ],
   imports: [
     BrowserModule,

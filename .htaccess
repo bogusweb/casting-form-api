@@ -1,0 +1,13 @@
+# ładowanie plików frontu
+RewriteCond %{REQUEST_URI} !/api
+RewriteCond %{REQUEST_URI} !/admin
+RewriteCond %{REQUEST_URI} !/login
+RewriteCond %{REQUEST_URI} !/public
+RewriteRule (.*) /front-src/dist/front-src/$0 [L]
+
+# wyświetlenie miniaturki wgranej grafiki
+RewriteCond %{REQUEST_URI} /api
+RewriteCond %{REQUEST_URI} /admin
+RewriteCond %{REQUEST_URI} /public
+RewriteCond %{REQUEST_URI} /login
+RewriteRule (.*) /public/$0 [L]

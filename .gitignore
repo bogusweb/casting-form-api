@@ -12,3 +12,5 @@
 /.idea
 
 /front-src/node_modules
+
+/public/images/assets/*

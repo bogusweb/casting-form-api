@@ -94,7 +94,7 @@ class CastingForm
     private $shortDescription;
 
     /**
-     * @ORM\Column(type="text", nullable=true)
+     * @ORM\Column(type="array", nullable=true)
      */
     private $additionalInformation;
 

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -15,11 +16,13 @@ class CastingCategory
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("form")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("form")
      */
     private $title;
 

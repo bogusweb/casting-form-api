@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CastingFormRepository")
- * @ApiResource()
+ * @ApiResource(normalizationContext={"groups"={"form"}})
  */
 class CastingForm
 {
@@ -15,93 +18,117 @@ class CastingForm
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
+     * @Groups("form")
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("form")
      */
     private $Name;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("form")
      */
     private $Surname;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("form")
      */
     private $sex;
 
     /**
      * @ORM\Column(type="string", length=16)
+     * @Groups("form")
      */
     private $phone;
 
     /**
      * @ORM\Column(type="string", length=128)
+     * @Groups("form")
      */
     private $email;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string")
+     * @Groups("form")
      */
     private $birthDate;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("form")
      */
     private $placeOfResidence;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("form")
      */
     private $nationality;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     * @Groups("form")
      */
     private $portfolioLink;
 
     /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $dimensions = [];
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $body = [];
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $face = [];
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $hair = [];
-
-    /**
      * @ORM\Column(type="text", nullable=true)
+     * @Groups("form")
+     */
+    private $shortDescription;
+
+    /**
+     * @ORM\Column(type="boolean")
+     * @Groups("form")
+     */
+    private $approvalClause;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     * @Groups("form")
+     */
+    private $images = [];
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @Groups("form")
+     */
+    private $dimensions;
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @Groups("form")
+     */
+    private $body;
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @Groups("form")
+     */
+    private $face;
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @Groups("form")
+     */
+    private $hair;
+
+    /**
+     * @ORM\Column(type="json_array", nullable=true)
+     * @Groups("form")
      */
     private $skills;
 
     /**
      * @ORM\Column(type="text", nullable=true)
-     */
-    private $shortDescription;
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
+     * @Groups("form")
      */
     private $additionalInformation;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $approvalClause;
 
     /**
      * @ORM\Column(type="boolean")
@@ -109,15 +136,10 @@ class CastingForm
     private $approvalProcessing;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\CastingCategory", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="integer")
+     * @Groups("form")
      */
     private $castingCategory;
-
-    /**
-     * @ORM\Column(type="array", nullable=true)
-     */
-    private $images = [];
 
     public function getId(): ?int
     {
@@ -184,12 +206,12 @@ class CastingForm
         return $this;
     }
 
-    public function getBirthDate(): ?\DateTimeInterface
+    public function getBirthDate(): ?string
     {
         return $this->birthDate;
     }
 
-    public function setBirthDate(\DateTimeInterface $birthDate): self
+    public function setBirthDate($birthDate): self
     {
         $this->birthDate = $birthDate;
 
@@ -232,66 +254,6 @@ class CastingForm
         return $this;
     }
 
-    public function getDimensions(): ?array
-    {
-        return $this->dimensions;
-    }
-
-    public function setDimensions(?array $dimensions): self
-    {
-        $this->dimensions = $dimensions;
-
-        return $this;
-    }
-
-    public function getBody(): ?array
-    {
-        return $this->body;
-    }
-
-    public function setBody(?array $body): self
-    {
-        $this->body = $body;
-
-        return $this;
-    }
-
-    public function getFace(): ?array
-    {
-        return $this->face;
-    }
-
-    public function setFace(?array $face): self
-    {
-        $this->face = $face;
-
-        return $this;
-    }
-
-    public function getHair(): ?array
-    {
-        return $this->hair;
-    }
-
-    public function setHair(?array $hair): self
-    {
-        $this->hair = $hair;
-
-        return $this;
-    }
-
-    public function getSkills(): ?string
-    {
-        return $this->skills;
-    }
-
-    public function setSkills(?string $skills): self
-    {
-        $this->skills = $skills;
-
-        return $this;
-    }
-
     public function getShortDescription(): ?string
     {
         return $this->shortDescription;
@@ -300,18 +262,6 @@ class CastingForm
     public function setShortDescription(?string $shortDescription): self
     {
         $this->shortDescription = $shortDescription;
-
-        return $this;
-    }
-
-    public function getAdditionalInformation(): ?string
-    {
-        return $this->additionalInformation;
-    }
-
-    public function setAdditionalInformation(?string $additionalInformation): self
-    {
-        $this->additionalInformation = $additionalInformation;
 
         return $this;
     }
@@ -340,18 +290,6 @@ class CastingForm
         return $this;
     }
 
-    public function getCastingCategory(): ?CastingCategory
-    {
-        return $this->castingCategory;
-    }
-
-    public function setCastingCategory(CastingCategory $castingCategory): self
-    {
-        $this->castingCategory = $castingCategory;
-
-        return $this;
-    }
-
     public function getImages(): ?array
     {
         return $this->images;
@@ -360,6 +298,90 @@ class CastingForm
     public function setImages(?array $images): self
     {
         $this->images = $images;
+
+        return $this;
+    }
+
+    public function getDimensions()
+    {
+        return $this->dimensions;
+    }
+
+    public function setDimensions($dimensions): self
+    {
+        $this->dimensions = $dimensions;
+
+        return $this;
+    }
+
+    public function getBody()
+    {
+        return $this->body;
+    }
+
+    public function setBody($body): self
+    {
+        $this->body = $body;
+
+        return $this;
+    }
+
+    public function getFace()
+    {
+        return $this->face;
+    }
+
+    public function setFace($face): self
+    {
+        $this->face = $face;
+
+        return $this;
+    }
+
+    public function getHair()
+    {
+        return $this->hair;
+    }
+
+    public function setHair($hair): self
+    {
+        $this->hair = $hair;
+
+        return $this;
+    }
+
+    public function getSkills()
+    {
+        return $this->skills;
+    }
+
+    public function setSkills($skills): self
+    {
+        $this->skills = $skills;
+
+        return $this;
+    }
+
+    public function getAdditionalInformation(): ?string
+    {
+        return $this->additionalInformation;
+    }
+
+    public function setAdditionalInformation(?string $additionalInformation): self
+    {
+        $this->additionalInformation = $additionalInformation;
+
+        return $this;
+    }
+
+    public function getCastingCategory(): ?int
+    {
+        return $this->castingCategory;
+    }
+
+    public function setCastingCategory(int $castingCategory): self
+    {
+        $this->castingCategory = $castingCategory;
 
         return $this;
     }

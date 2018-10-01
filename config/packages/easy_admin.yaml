@@ -7,3 +7,6 @@ easy_admin:
     - App\Entity\CastingCategory
     - App\Entity\CastingForm
     - App\Entity\User
+  list:
+    actions:
+      - { name: 'genPdf', icon: 'file-pdf-o' }

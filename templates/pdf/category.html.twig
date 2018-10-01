@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+</head>
+<body style="font-size: 12px;">
+
+<div style="text-align: center;">
+    <h1>All applications for</h1>
+    <h2>{{ category.title }}</h2>
+</div>
+{% for form in forms %}
+<fieldset style="border: 2px solid black; margin: 15px 0; padding: 15px;">
+    <section>
+        <h3>Basic data:</h3>
+        <ul>
+            <li><strong>Name</strong>: {{ form.name }}</li>
+            <li><strong>Surname</strong>: {{ form.surname }}</li>
+            <li><strong>Sex</strong>: {{ form.sex }}</li>
+            <li><strong>Phone</strong>: {{ form.phone }}</li>
+            <li><strong>Email</strong>: {{ form.email }}</li>
+            <li><strong>Birth date</strong>: {{ form.birthDate[:10] }}</li>
+            <li><strong>Place of residence</strong>: {{ form.placeOfResidence }}</li>
+            {% if form.portfolioLink %}<li><strong>Portoflio link</strong>: <a href="{{ form.portfolioLink }}">{{ form.portfolioLink }}</a></li>{% endif %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Dimensionals:</h3>
+
+        <ul>
+            {% if form.dimensions['up'] is defined %}<li><strong>The size of the upper part of the garment:</strong> {{ form.dimensions['up'] }}cm</li>{% endif %}
+            {% if form.dimensions['down'] is defined %}<li><strong>The size of the lower part of the garment:</strong> {{ form.dimensions['down'] }}cm</li>{% endif %}
+            {% if form.dimensions['shoe'] is defined %}<li><strong>The size of the shoe:</strong> {{ form.dimensions['shoe'] }}cm</li>{% endif %}
+            {% if form.dimensions['breast'] is defined %}<li><strong>Breast size:</strong> {{ form.dimensions['breast'] }}cm</li>{% endif %}
+            {% if form.dimensions['hips'] is defined %}<li><strong>Size of the hips:</strong> {{ form.dimensions['hips'] }}cm</li>{% endif %}
+            {% if form.dimensions['waist'] is defined %}<li><strong>Waist size:</strong> {{ form.dimensions['waist'] }}cm</li>{% endif %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Body:</h3>
+
+        <ul>
+            {% if form.body['beauty'] is defined %}<li><strong>Beauty:</strong> {{ form.body['beauty'] }}</li>{% endif %}
+            {% if form.body['figure'] is defined %}<li><strong>Figure:</strong> {{ form.body['figure'] }}</li>{% endif %}
+            {% if form.body['physique'] is defined %}<li><strong>Physique:</strong> {{ form.body['physique'] }}</li>{% endif %}
+            {% if form.body['breastChest'] is defined %}<li><strong>Breast / Chest:</strong> {{ form.body['breastChest'] }}</li>{% endif %}
+            {% if form.body['legs'] is defined %}<li><strong>Legs:</strong> {{ form.body['legs'] }}</li>{% endif %}
+            {% if form.body['hands'] is defined %}<li><strong>Hands:</strong> {{ form.body['hands'] }}</li>{% endif %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Face:</h3>
+
+        <ul>
+            {% if form.face['ears'] is defined %}<li><strong>Ears:</strong> {{ form.face['ears'] }}</li>{% endif %}
+            {% if form.face['eyes'] is defined %}<li><strong>Eyes:</strong> {{ form.face['eyes'] }}</li>{% endif %}
+            {% if form.face['nose'] is defined %}<li><strong>Nose:</strong> {{ form.face['nose'] }}</li>{% endif %}
+            {% if form.face['lipsTeeth'] is defined %}<li><strong>Lips and teeth:</strong> {{ form.face['lipsTeeth'] }}</li>{% endif %}
+            {% if form.face['eyeColor'] is defined %}<li><strong>Eye color:</strong> {{ form.face['eyeColor'] }}</li>{% endif %}
+            {% if form.face['characteristics'] is defined %}<li><strong>Characteristics:</strong> {{ form.face['characteristics'] }}</li>{% endif %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Hair:</h3>
+
+        <ul>
+            {% if form.hair['color'] is defined %}<li><strong>Color:</strong> {{ form.hair['color'] }}</li>{% endif %}
+            {% if form.hair['length'] is defined %}<li><strong>Length:</strong> {{ form.hair['length'] }}</li>{% endif %}
+            {% if form.hair['quality'] is defined %}<li><strong>Quality:</strong> {{ form.hair['quality'] }}</li>{% endif %}
+            {% if form.hair['type'] is defined %}<li><strong>Type:</strong> {{ form.hair['type'] }}</li>{% endif %}
+            {% if form.hair['hue'] is defined %}<li><strong>Hue:</strong> {{ form.hair['hue'] }}</li>{% endif %}
+            {% if form.hair['other'] is defined %}<li><strong>Other:</strong> {{ form.hair['other'] }}</li>{% endif %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Skills:</h3>
+        <ul>
+            {% for val in form.skills %}
+                {% for l in val %}
+                    <li>{{ l }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section>
+        <h3>Descriptions</h3>
+
+        {% if form.shortDescription %}
+            <h4>Short description</h4>
+            <div>{{ form.shortDescription }}</div>
+        {% endif %}
+
+        {% if form.additionalInformation %}
+            <h4>Additional description</h4>
+            <div>{{ form.additionalInformation }}</div>
+        {% endif %}
+    </section>
+</fieldset>
+{% endfor %}
+</body>
+</html>

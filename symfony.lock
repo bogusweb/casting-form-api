@@ -119,6 +119,24 @@
             "ref": "fe60ce509ef04a3f40da96e3979bc8d9b13b2372"
         }
     },
+    "knplabs/knp-snappy": {
+        "version": "v1.0.4"
+    },
+    "knplabs/knp-snappy-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.5",
+            "ref": "c81bdcf4a9d4e7b1959071457f9608631865d381"
+        }
+    },
+    "mpdf/mpdf": {
+        "version": "v7.1.5"
+    },
+    "myclabs/deep-copy": {
+        "version": "1.8.1"
+    },
     "nelmio/cors-bundle": {
         "version": "1.5",
         "recipe": {
@@ -187,6 +205,9 @@
             "version": "5.2",
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
+    },
+    "setasign/fpdi": {
+        "version": "1.6.2"
     },
     "stof/doctrine-extensions-bundle": {
         "version": "1.2",
